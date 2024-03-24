@@ -24,6 +24,8 @@ interface IWeatherContextProps {
   setIsLoading: (isLoading: boolean) => void;
   searchCity: (city: string) => void;
   searchByGeo: (latitude: number, longitude: number) => void;
+  GeoSearchActive: boolean;
+  setGeoSearchActive: (GeoSearchActive: boolean) => void;
 }
 
 export const WeatherContext = createContext<IWeatherContextProps>({
@@ -32,6 +34,8 @@ export const WeatherContext = createContext<IWeatherContextProps>({
   setIsLoading: () => {},
   searchCity: () => {},
   searchByGeo: () => {},
+  GeoSearchActive: false,
+  setGeoSearchActive: () => {},
 });
 
 interface IWeatherProviderProps {
@@ -41,6 +45,7 @@ interface IWeatherProviderProps {
 export const WeatherProvider: FunctionComponent<IWeatherProviderProps> = ({ children }) => {
   const [weatherData, setWeatherData] = useState<IWeatherData | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [GeoSearchActive, setGeoSearchActive] = useState<boolean>(false);
 
   const fetchWeather = async (url: string) => {
     setIsLoading(true);
@@ -55,11 +60,13 @@ export const WeatherProvider: FunctionComponent<IWeatherProviderProps> = ({ chil
   };
 
   const searchCity = useCallback(async (city: string) => {
+    setGeoSearchActive(false);
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=a09dde67358647287aa51f21c343ffac&lang=ru&units=metric`;
     await fetchWeather(url);
   }, []);
 
   const searchByGeo = useCallback(async (latitude: number, longitude: number) => {
+    setGeoSearchActive(true);
     const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=a09dde67358647287aa51f21c343ffac&lang=ru&units=metric`;
     await fetchWeather(url);
   }, []);
@@ -77,7 +84,15 @@ export const WeatherProvider: FunctionComponent<IWeatherProviderProps> = ({ chil
 
   return (
     <WeatherContext.Provider
-      value={{ weatherData, isLoading, setIsLoading, searchCity, searchByGeo }}
+      value={{
+        weatherData,
+        isLoading,
+        setIsLoading,
+        searchCity,
+        searchByGeo,
+        GeoSearchActive,
+        setGeoSearchActive,
+      }}
     >
       {children}
     </WeatherContext.Provider>

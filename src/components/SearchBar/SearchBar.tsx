@@ -1,12 +1,13 @@
 import React, { useState, FunctionComponent } from 'react';
 import { useWeather } from '../hooks/useWeather';
 import { MdMyLocation } from 'react-icons/md';
+import cn from 'classnames';
 
 import style from './SearchBar.module.scss';
 
 const SearchBar: FunctionComponent = () => {
   const [city, setCity] = useState('');
-  const { searchCity, searchByGeo, setIsLoading } = useWeather();
+  const { searchCity, searchByGeo, setIsLoading, GeoSearchActive } = useWeather();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCity(event.target.value);
@@ -36,7 +37,7 @@ const SearchBar: FunctionComponent = () => {
   return (
     <>
       <button className={style.geo_btn} onClick={handleGeoSearch}>
-        <MdMyLocation />
+        <MdMyLocation className={cn(style.geo_icon, { [style.active]: GeoSearchActive })} />
       </button>
       <input
         className={style.search_input}

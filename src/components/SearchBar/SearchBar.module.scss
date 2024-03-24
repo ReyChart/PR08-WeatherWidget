@@ -3,13 +3,12 @@
 .geo_btn {
   background-color: transparent;
 
-  > svg {
+  > .geo_icon {
     width: 35px;
     height: 35px;
     color: $gray;
-    transition: color 0.4s ease-in-out;
 
-    &:hover {
+    &.active {
       color: $heading-color;
     }
   }
