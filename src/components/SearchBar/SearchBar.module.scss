@@ -7,9 +7,14 @@
     width: 35px;
     height: 35px;
     color: $gray;
+    transition: transform 0.4s ease-in-out;
 
     &.active {
       color: $heading-color;
+    }
+
+    &:hover {
+      transform: scale(1.2);
     }
   }
 }
