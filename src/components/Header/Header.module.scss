@@ -1,0 +1,25 @@
+@import '@/assets/styles/variables';
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  > img {
+    width: 65px;
+    height: 65px;
+  }
+
+  > h1 {
+    font-size: 25px;
+    font-weight: 700;
+    color: $heading-color;
+  }
+}

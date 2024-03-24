@@ -1,0 +1,10 @@
+@import '@/assets/styles/variables';
+
+.skeleton {
+  background-color: $widget-bg;
+  border-radius: 20px;
+
+  &::after {
+    background-image: linear-gradient(90deg, $widget-bg, #5e5e5e, $widget-bg);
+  }
+}

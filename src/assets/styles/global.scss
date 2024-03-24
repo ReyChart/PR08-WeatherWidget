@@ -10,6 +10,7 @@
 }
 
 body {
-  background-color: #393939;
-  color: #ffffff;
+  font: 400 normal 14px/17px $default-font;
+  background-color: $body-bg;
+  color: $white;
 }

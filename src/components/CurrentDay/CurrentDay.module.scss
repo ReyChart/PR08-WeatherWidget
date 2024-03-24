@@ -1,0 +1,50 @@
+@import '@/assets/styles/variables';
+
+.current_day {
+  margin-top: 30px;
+
+  > .wrapper {
+    padding: 20px;
+    max-width: 400px;
+    width: 100%;
+    background-color: $widget-bg;
+    border-radius: 20px;
+    box-shadow: $widget-shadow;
+
+    > .wrapper_top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+
+      & p:first-child {
+        font-size: 70px;
+        line-height: 100px;
+        font-weight: 500;
+        color: $heading-color;
+      }
+
+      & p:last-child {
+        font-size: 32px;
+        line-height: 40px;
+      }
+
+      > img {
+        width: 140px;
+        height: 140px;
+      }
+    }
+
+    > .wrapper_bottom {
+      & p:first-child {
+        margin-bottom: 8px;
+      }
+
+      > p {
+        font-size: 25px;
+        line-height: 30px;
+        color: $gray;
+      }
+    }
+  }
+}
