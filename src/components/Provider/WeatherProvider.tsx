@@ -4,10 +4,14 @@ import axios from 'axios';
 export interface IWeatherData {
   main: {
     temp: number;
+    humidity: number;
+    pressure: number;
   };
   name: string;
   sys: {
     country: string;
+    sunrise: number;
+    sunset: number;
   };
   timezone: number;
   weather: [
@@ -16,6 +20,13 @@ export interface IWeatherData {
       icon: string;
     }
   ];
+  wind: {
+    speed: number;
+  };
+  clouds: {
+    all: number;
+  };
+  visibility: number;
 }
 
 interface IWeatherContextProps {

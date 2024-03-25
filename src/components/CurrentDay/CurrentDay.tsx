@@ -1,5 +1,6 @@
 import { FunctionComponent, useContext } from 'react';
 import { WeatherContext } from '../Provider/WeatherProvider';
+import CurrentDayInfo from '../CurrentDayInfo/CurrentDayInfo';
 import SkeletonLoader from '../SkeletonLoader/SkeletonLoader';
 import { formatDateTimezone } from '../utils/formatDate';
 
@@ -12,6 +13,7 @@ const CurrentDay: FunctionComponent = () => {
     return (
       <section className={style.current_day}>
         <SkeletonLoader width={400} height={278} />
+        <CurrentDayInfo />
       </section>
     );
   }
@@ -37,6 +39,7 @@ const CurrentDay: FunctionComponent = () => {
           </p>
         </div>
       </div>
+      <CurrentDayInfo />
     </section>
   );
 };
