@@ -18,7 +18,7 @@ const CurrentDay: FunctionComponent = () => {
     );
   }
 
-  const iconUrl = `http://openweathermap.org/img/wn/${weatherData.weather[0].icon}.png`;
+  const iconUrl = `http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`;
 
   return (
     <section className={style.current_day}>

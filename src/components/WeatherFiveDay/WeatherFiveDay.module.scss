@@ -1,0 +1,10 @@
+@import '@/assets/styles/variables';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+
+  > .item_wrapper {
+    display: flex;
+  }
+}

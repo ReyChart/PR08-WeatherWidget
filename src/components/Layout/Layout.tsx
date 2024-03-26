@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react';
 import Header from '../Header/Header';
 import CurrentDay from '../CurrentDay/CurrentDay';
+import WeatherFiveDay from '../WeatherFiveDay/WeatherFiveDay';
 
 import style from './Layout.module.scss';
 
@@ -9,6 +10,7 @@ const Layout: FunctionComponent = () => {
     <main className={style.layout}>
       <Header />
       <CurrentDay />
+      <WeatherFiveDay />
     </main>
   );
 };

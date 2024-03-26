@@ -3,6 +3,9 @@ import 'moment/dist/locale/ru';
 
 moment.locale('ru');
 
+export const formatDate = (date: Date, variant: string) =>
+  moment(date).format(variant === 'day' ? 'dddd HH:mm' : 'HH:mm');
+
 export const formatDateTimezone = (timezone: number, variant: string) => {
   const formattedDate = moment
     .utc(new Date(Date.now() + timezone * 1000))
