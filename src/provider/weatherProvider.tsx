@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect, useCallback, FunctionComponent } from 'react';
+import AutoModalError from '../components/AutoModalError/AutoModalError';
 import axios from 'axios';
 
 export interface IWeatherData {
@@ -44,7 +45,10 @@ interface IWeatherContextProps {
   weatherData: IWeatherData | null;
   weatherFiveDayData: IWeatherFiveDayData | null;
   isLoading: boolean;
+  isLoadingFiveDay: boolean;
+  isGeoDenied: boolean;
   setIsLoading: (isLoading: boolean) => void;
+  setIsLoadingFiveDay: (isLoading: boolean) => void;
   searchCity: (city: string) => void;
   searchByGeo: (latitude: number, longitude: number) => void;
   GeoSearchActive: boolean;
@@ -56,6 +60,9 @@ export const WeatherContext = createContext<IWeatherContextProps>({
   weatherData: null,
   weatherFiveDayData: null,
   isLoading: false,
+  isLoadingFiveDay: false,
+  setIsLoadingFiveDay: () => {},
+  isGeoDenied: false,
   setIsLoading: () => {},
   searchCity: () => {},
   searchByGeo: () => {},
@@ -73,6 +80,9 @@ export const WeatherProvider: FunctionComponent<IWeatherProviderProps> = ({ chil
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [GeoSearchActive, setGeoSearchActive] = useState<boolean>(false);
   const [weatherFiveDayData, setWeatherFiveDayData] = useState<IWeatherFiveDayData | null>(null);
+  const [isGeoDenied, setIsGeoDenied] = useState<boolean>(false);
+  const [showModal, setShowModal] = useState(false);
+  const [isLoadingFiveDay, setIsLoadingFiveDay] = useState<boolean>(false);
 
   const fetchWeather = async (url: string) => {
     setIsLoading(true);
@@ -88,7 +98,7 @@ export const WeatherProvider: FunctionComponent<IWeatherProviderProps> = ({ chil
 
   const fetchWeatherFiveDay = useCallback(
     async (city: string | null, latitude?: number, longitude?: number) => {
-      setIsLoading(true);
+      setIsLoadingFiveDay(true);
       try {
         let url = '';
         if (city) {
@@ -105,31 +115,25 @@ export const WeatherProvider: FunctionComponent<IWeatherProviderProps> = ({ chil
       } catch (error) {
         console.error('Ошибка при запросе прогноза погоды:', error);
       } finally {
-        setIsLoading(false);
+        setIsLoadingFiveDay(false);
       }
     },
     []
   );
 
-  const searchCity = useCallback(
-    async (city: string) => {
-      setGeoSearchActive(false);
-      const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=a09dde67358647287aa51f21c343ffac&lang=ru&units=metric`;
-      await fetchWeather(url);
-      await fetchWeatherFiveDay(city);
-    },
-    [fetchWeatherFiveDay]
-  );
+  const searchCity = useCallback(async (city: string) => {
+    setGeoSearchActive(false);
+    setIsLoadingFiveDay(true);
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=a09dde67358647287aa51f21c343ffac&lang=ru&units=metric`;
+    await fetchWeather(url);
+  }, []);
 
-  const searchByGeo = useCallback(
-    async (latitude: number, longitude: number) => {
-      setGeoSearchActive(true);
-      const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=a09dde67358647287aa51f21c343ffac&lang=ru&units=metric`;
-      await fetchWeather(url);
-      await fetchWeatherFiveDay(null, latitude, longitude);
-    },
-    [fetchWeatherFiveDay]
-  );
+  const searchByGeo = useCallback(async (latitude: number, longitude: number) => {
+    setGeoSearchActive(true);
+    setIsLoadingFiveDay(true);
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=a09dde67358647287aa51f21c343ffac&lang=ru&units=metric`;
+    await fetchWeather(url);
+  }, []);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
@@ -138,6 +142,8 @@ export const WeatherProvider: FunctionComponent<IWeatherProviderProps> = ({ chil
       },
       (error) => {
         console.error(error);
+        setIsGeoDenied(true);
+        setShowModal(true);
       }
     );
   }, [searchByGeo]);
@@ -148,7 +154,10 @@ export const WeatherProvider: FunctionComponent<IWeatherProviderProps> = ({ chil
         weatherData,
         weatherFiveDayData,
         isLoading,
+        isLoadingFiveDay,
+        isGeoDenied,
         setIsLoading,
+        setIsLoadingFiveDay,
         searchCity,
         searchByGeo,
         GeoSearchActive,
@@ -157,6 +166,9 @@ export const WeatherProvider: FunctionComponent<IWeatherProviderProps> = ({ chil
       }}
     >
       {children}
+      {showModal && (
+        <AutoModalError message="Геолокация отключена пользователем или не поддерживается вашим браузером!" />
+      )}
     </WeatherContext.Provider>
   );
 };

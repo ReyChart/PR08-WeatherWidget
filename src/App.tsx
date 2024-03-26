@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import Layout from './components/Layout/Layout';
-import { WeatherProvider } from './components/Provider/WeatherProvider';
+import { WeatherProvider } from './provider/weatherProvider';
 
 import '@/assets/styles/global.scss';
 

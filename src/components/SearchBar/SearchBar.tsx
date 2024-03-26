@@ -1,5 +1,5 @@
 import React, { useState, FunctionComponent } from 'react';
-import { useWeather } from '../hooks/useWeather';
+import { useWeather } from '../../hooks/useWeather';
 import { MdMyLocation } from 'react-icons/md';
 import cn from 'classnames';
 

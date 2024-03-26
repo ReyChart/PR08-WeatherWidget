@@ -1,16 +1,16 @@
 import { FunctionComponent, useContext } from 'react';
-import { WeatherContext } from '../Provider/WeatherProvider';
-import { formatDateUnix } from '../utils/formatDate';
-import { convertKilometers } from '../utils/convertKilometres';
-import { convertPressure } from '../utils/convertPressure';
+import { WeatherContext } from '../../provider/weatherProvider';
+import { formatDateUnix } from '../../utils/formatDate';
+import { convertKilometers } from '../../utils/convertKilometres';
+import { convertPressure } from '../../utils/convertPressure';
 import { FaCloud, FaWind, FaEye, FaThermometerEmpty } from 'react-icons/fa';
 import { FiSunrise, FiSunset } from 'react-icons/fi';
 import { FaDroplet } from 'react-icons/fa6';
 import SkeletonLoader from '../SkeletonLoader/SkeletonLoader';
 
-import style from './CurrentDayInfo.module.scss';
+import style from './WeatherTodayInfo.module.scss';
 
-const CurrentDayInfo: FunctionComponent = () => {
+const WeatherTodayInfo: FunctionComponent = () => {
   const { weatherData, isLoading } = useContext(WeatherContext);
 
   if (!weatherData || isLoading) {
@@ -80,4 +80,4 @@ const CurrentDayInfo: FunctionComponent = () => {
   );
 };
 
-export default CurrentDayInfo;
+export default WeatherTodayInfo;
