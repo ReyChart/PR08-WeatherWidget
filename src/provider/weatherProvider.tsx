@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect, useCallback, FunctionComponent } from 'react';
 import AutoModalError from '../components/AutoModalError/AutoModalError';
+import { formatDateUnix } from '../utils/formatDate';
 import axios from 'axios';
 
 export interface IWeatherData {
@@ -54,6 +55,8 @@ interface IWeatherContextProps {
   GeoSearchActive: boolean;
   setGeoSearchActive: (GeoSearchActive: boolean) => void;
   fetchWeatherFiveDay: (city: string | null, latitude?: number, longitude?: number) => void;
+  error404: string | null;
+  setError404: (error: string | null) => void;
 }
 
 export const WeatherContext = createContext<IWeatherContextProps>({
@@ -69,6 +72,8 @@ export const WeatherContext = createContext<IWeatherContextProps>({
   GeoSearchActive: false,
   setGeoSearchActive: () => {},
   fetchWeatherFiveDay: async () => {},
+  error404: null,
+  setError404: () => {},
 });
 
 interface IWeatherProviderProps {
@@ -83,6 +88,7 @@ export const WeatherProvider: FunctionComponent<IWeatherProviderProps> = ({ chil
   const [isGeoDenied, setIsGeoDenied] = useState<boolean>(false);
   const [showModal, setShowModal] = useState(false);
   const [isLoadingFiveDay, setIsLoadingFiveDay] = useState<boolean>(false);
+  const [error404, setError404] = useState<string | null>(null);
 
   const fetchWeather = async (url: string) => {
     setIsLoading(true);
@@ -91,6 +97,7 @@ export const WeatherProvider: FunctionComponent<IWeatherProviderProps> = ({ chil
       setWeatherData(response.data);
     } catch (error) {
       console.error('Ошибка при запросе погоды:', error);
+      setError404('Город введен некорректно');
     } finally {
       setIsLoading(false);
     }
@@ -108,12 +115,17 @@ export const WeatherProvider: FunctionComponent<IWeatherProviderProps> = ({ chil
         }
 
         const response = await axios.get(url);
-        const filterWeatherFiveDay = response.data.list.filter((item: IWeatherFiveDayItem) =>
-          item.dt_txt.includes('12:00:00')
-        );
+        const timezone = response.data.city.timezone;
+
+        const filterWeatherFiveDay = response.data.list.filter((item: IWeatherFiveDayItem) => {
+          const timeDay = formatDateUnix(item.dt, timezone);
+          return timeDay >= '11:00' && timeDay <= '13:00';
+        });
+
         setWeatherFiveDayData({ list: filterWeatherFiveDay });
       } catch (error) {
         console.error('Ошибка при запросе прогноза погоды:', error);
+        setError404('Город введен некорректно');
       } finally {
         setIsLoadingFiveDay(false);
       }
@@ -163,6 +175,8 @@ export const WeatherProvider: FunctionComponent<IWeatherProviderProps> = ({ chil
         GeoSearchActive,
         setGeoSearchActive,
         fetchWeatherFiveDay,
+        error404,
+        setError404,
       }}
     >
       {children}

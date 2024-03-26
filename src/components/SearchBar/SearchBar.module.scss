@@ -19,18 +19,50 @@
   }
 }
 
-.search_input {
-  width: 200px;
-  height: 35px;
-  font-size: 16px;
-  font-weight: 500;
-  color: $white;
-  background-color: $widget-bg;
-  border-radius: 10px;
-  padding-left: 10px;
+.input_wrapper {
+  position: relative;
 
-  &::placeholder {
-    color: $gray;
+  .search_input {
+    width: 200px;
+    height: 35px;
+    font-size: 16px;
+    font-weight: 500;
+    color: $white;
+    background-color: $widget-bg;
+    border-radius: 10px;
+    padding-left: 10px;
+
+    &::placeholder {
+      color: $gray;
+    }
+  }
+
+  .error_message {
+    position: absolute;
+    top: 50px;
+    left: -30px;
+    width: 260px;
+    text-align: center;
+    font-weight: 500;
+    z-index: 1000;
+    background-color: $widget-bg;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: $widget-shadow;
+
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      left: 120px;
+      top: -8px;
+      width: 20px;
+      height: 20px;
+      z-index: -1;
+      background-color: $widget-bg;
+      transform: rotate(45deg);
+      border-radius: 3px;
+    }
   }
 }
 
