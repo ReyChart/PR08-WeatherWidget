@@ -12,7 +12,7 @@ const WeatherToday: FunctionComponent = () => {
   if (!weatherData || isLoading) {
     return (
       <section className={style.current_day}>
-        <SkeletonLoader width={400} height={278} />
+        <SkeletonLoader width={400} height={296} />
         <WeatherTodayInfo />
       </section>
     );
@@ -25,7 +25,10 @@ const WeatherToday: FunctionComponent = () => {
       <div className={style.wrapper}>
         <div className={style.wrapper_top}>
           <div>
-            <p>{`${Math.round(weatherData.main.temp)}°C`}</p>
+            <p>
+              {Math.round(weatherData.main.temp)}
+              <span>°C</span>
+            </p>
             <p>{formatDateTimezone(weatherData.timezone, 'day')}</p>
           </div>
           <img src={iconUrl} alt="Weather icon" />

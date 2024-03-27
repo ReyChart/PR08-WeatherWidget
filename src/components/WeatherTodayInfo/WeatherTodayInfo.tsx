@@ -30,51 +30,51 @@ const WeatherTodayInfo: FunctionComponent = () => {
       <div className={style.weather_item}>
         <div>
           <FaCloud />
-          <h2>Облачность</h2>
+          <h3>Облачность</h3>
         </div>
-        <span>{clouds.all}%</span>
+        <p>{clouds.all}%</p>
       </div>
       <div className={style.weather_item}>
         <div>
           <FaWind />
-          <h2>Скорость ветра</h2>
+          <h3>Скорость ветра</h3>
         </div>
-        <span>{wind.speed} м/с</span>
+        <p>{wind.speed}м/с</p>
       </div>
       <div className={style.weather_item}>
         <div>
           <FiSunrise />
-          <h2>
+          <p>
             Восход: <span>{formatDateUnix(sys.sunrise, timezone)}</span>
-          </h2>
+          </p>
         </div>
         <div>
           <FiSunset />
-          <h2>
+          <p>
             Закат: <span>{formatDateUnix(sys.sunset, timezone)}</span>
-          </h2>
+          </p>
         </div>
       </div>
       <div className={style.weather_item}>
         <div>
           <FaDroplet />
-          <h2>Влажность</h2>
+          <h3>Влажность</h3>
         </div>
-        <span>{main.humidity}%</span>
+        <p>{main.humidity}%</p>
       </div>
       <div className={style.weather_item}>
         <div>
           <FaEye />
-          <h2>Видимость</h2>
+          <h3>Видимость</h3>
         </div>
-        <span>{convertKilometers(visibility)} км</span>
+        <p>{convertKilometers(visibility)}км</p>
       </div>
       <div className={style.weather_item}>
         <div>
           <FaThermometerEmpty />
-          <h2>Давление</h2>
+          <h3>Давление</h3>
         </div>
-        <span>{convertPressure(main.pressure)} мм</span>
+        <p>{convertPressure(main.pressure)}мм</p>
       </div>
     </div>
   );

@@ -2,6 +2,7 @@ import { useContext, useState, FunctionComponent, useEffect } from 'react';
 import { WeatherContext } from '../../provider/weatherProvider';
 import { formatDate } from '../../utils/formatDate';
 import SkeletonLoader from '../SkeletonLoader/SkeletonLoader';
+import cn from 'classnames';
 
 import style from './WeatherFiveDay.module.scss';
 
@@ -19,12 +20,22 @@ const WeatherFiveDay: FunctionComponent = () => {
   return (
     <div className={style.wrapper}>
       <div className={style.btn_wrapper}>
-        <button onClick={() => setViewMode('today')}>Сегодня</button>
-        <button onClick={() => setViewMode('5days')}>На 5 дней</button>
+        <button
+          className={cn({ [style.active]: viewMode === 'today' })}
+          onClick={() => setViewMode('today')}
+        >
+          Сегодня
+        </button>
+        <button
+          className={cn({ [style.active]: viewMode === '5days' })}
+          onClick={() => setViewMode('5days')}
+        >
+          На 5 дней
+        </button>
       </div>
       <div className={style.item_wrapper}>
         {viewMode === '5days' && isLoadingFiveDay ? (
-          [...Array(5)].map((_, index) => <SkeletonLoader key={index} height={100} width={166} />)
+          [...Array(5)].map((_, index) => <SkeletonLoader key={index} width={200} height={202} />)
         ) : viewMode === '5days' && weatherFiveDayData ? (
           weatherFiveDayData.list.map((item) => (
             <div key={item.dt} className={style.weather_item}>
@@ -37,7 +48,7 @@ const WeatherFiveDay: FunctionComponent = () => {
             </div>
           ))
         ) : (
-          <p>Погода на сегодня</p>
+          <p className={style.item_text}>Погода на сегодня</p>
         )}
       </div>
     </div>

@@ -7,10 +7,12 @@ import style from './Layout.module.scss';
 
 const Layout: FunctionComponent = () => {
   return (
-    <main className={style.layout}>
-      <Header />
-      <WeatherToday />
-      <WeatherFiveDay />
+    <main>
+      <div className={style.container}>
+        <Header />
+        <WeatherToday />
+        <WeatherFiveDay />
+      </div>
     </main>
   );
 };

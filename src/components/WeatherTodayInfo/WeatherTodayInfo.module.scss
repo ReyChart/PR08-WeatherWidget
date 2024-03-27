@@ -1,4 +1,5 @@
 @import '@/assets/styles/variables';
+@import '@/assets/styles/mixins';
 
 .wrapper {
   display: flex;
@@ -7,36 +8,39 @@
   flex-wrap: wrap;
 
   > .weather_item {
+    @include bgWidget;
     display: flex;
     flex-direction: column;
-    // align-items: center;
-    gap: 20px;
-    padding: 20px;
+    gap: 30px;
     max-width: 226px;
     height: 138px;
-    width: 100%;
-    background-color: $widget-bg;
-    border-radius: 20px;
-    box-shadow: $widget-shadow;
 
     > div {
       display: flex;
       gap: 10px;
       align-items: center;
 
-      > h2 {
+      > h3 {
         font-size: 18px;
       }
 
       > svg {
-        width: 25px;
-        height: 25px;
-        color: $heading-color;
+        @include svgIcon;
+      }
+
+      > p {
+        font-size: 18px;
+        line-height: 20px;
+
+        > span {
+          font-weight: 500;
+        }
       }
     }
 
-    > span {
+    > p {
       font-size: 40px;
+      line-height: 30px;
     }
   }
 }

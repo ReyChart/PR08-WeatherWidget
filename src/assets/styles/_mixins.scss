@@ -1,0 +1,21 @@
+@mixin button {
+  height: 35px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  color: $white;
+}
+
+@mixin bgWidget {
+  padding: 20px;
+  width: 100%;
+  background-color: $widget-bg;
+  border-radius: 20px;
+  // box-shadow: $widget-shadow;
+}
+
+@mixin svgIcon {
+  width: 25px;
+  height: 25px;
+  color: $heading-color;
+}
