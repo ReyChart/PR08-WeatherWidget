@@ -3,6 +3,7 @@ import { WeatherContext } from '../../provider/weatherProvider';
 import WeatherTodayInfo from '../WeatherTodayInfo/WeatherTodayInfo';
 import SkeletonLoader from '../SkeletonLoader/SkeletonLoader';
 import { formatDateTimezone } from '../../utils/formatDate';
+import { urlIcon } from '../../constants/urlIcon';
 
 import style from './WeatherToday.module.scss';
 
@@ -18,10 +19,8 @@ const WeatherToday: FunctionComponent = () => {
     );
   }
 
-  const iconUrl = `http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`;
-
   return (
-    <section className={style.current_day}>
+    <section className={style.weather_today}>
       <div className={style.wrapper}>
         <div className={style.wrapper_top}>
           <div>
@@ -31,7 +30,7 @@ const WeatherToday: FunctionComponent = () => {
             </p>
             <p>{formatDateTimezone(weatherData.timezone, 'day')}</p>
           </div>
-          <img src={iconUrl} alt="Weather icon" />
+          <img src={`${urlIcon}${weatherData.weather[0].icon}@2x.png`} alt="Weather icon" />
         </div>
         <div className={style.wrapper_bottom}>
           <p>

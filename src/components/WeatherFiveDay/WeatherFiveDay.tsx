@@ -2,6 +2,7 @@ import { useContext, useState, FunctionComponent, useEffect } from 'react';
 import { WeatherContext } from '../../provider/weatherProvider';
 import { formatDate } from '../../utils/formatDate';
 import SkeletonLoader from '../SkeletonLoader/SkeletonLoader';
+import { urlIcon } from '../../constants/urlIcon';
 import cn from 'classnames';
 
 import style from './WeatherFiveDay.module.scss';
@@ -18,7 +19,7 @@ const WeatherFiveDay: FunctionComponent = () => {
   }, [viewMode, weatherData, fetchWeatherFiveDay]);
 
   return (
-    <div className={style.wrapper}>
+    <section className={style.weather_fiveday}>
       <div className={style.btn_wrapper}>
         <button
           className={cn({ [style.active]: viewMode === 'today' })}
@@ -40,10 +41,7 @@ const WeatherFiveDay: FunctionComponent = () => {
           weatherFiveDayData.list.map((item) => (
             <div key={item.dt} className={style.weather_item}>
               <p>{formatDate(new Date(item.dt_txt), 'day')}</p>
-              <img
-                src={`http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`}
-                alt="Weather icon"
-              />
+              <img src={`${urlIcon}${item.weather[0].icon}@2x.png`} alt="Weather icon" />
               <p>{Math.round(item.main.temp)}°C</p>
             </div>
           ))
@@ -51,7 +49,7 @@ const WeatherFiveDay: FunctionComponent = () => {
           <p className={style.item_text}>Погода на сегодня</p>
         )}
       </div>
-    </div>
+    </section>
   );
 };
 
