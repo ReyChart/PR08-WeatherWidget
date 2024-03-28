@@ -43,6 +43,7 @@ const SearchBar: FunctionComponent = () => {
   };
 
   const handleGeoSearch = () => {
+    setCity('');
     setIsLoading(true);
     setError404(null);
     setIsLoadingFiveDay(true);

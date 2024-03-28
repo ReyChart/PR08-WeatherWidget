@@ -6,10 +6,27 @@
   gap: 40px;
   margin-top: 30px;
 
+  @include mobileSmall {
+    padding: 0 10px;
+  }
+
+  @include netbook {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
   > .wrapper {
     @include bgWidget;
     max-width: 400px;
     min-height: 296px;
+
+    @include netbook {
+      max-width: 492px;
+    }
+
+    @include mobileSmall {
+      max-width: 400px;
+    }
 
     > .wrapper_top {
       display: flex;

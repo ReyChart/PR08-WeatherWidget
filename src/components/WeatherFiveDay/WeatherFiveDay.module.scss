@@ -5,11 +5,32 @@
   display: flex;
   flex-direction: column;
   margin-top: 30px;
+  margin-bottom: 20px;
+
+  @include netbook {
+    padding: 0 130px;
+  }
+
+  @include tabletLarge {
+    padding: 0 80px;
+  }
+
+  @include tabletSmall {
+    padding: 0 25px;
+  }
+
+  @include mobileLarge {
+    padding: 0 10px;
+  }
 
   > .btn_wrapper {
     display: flex;
-    gap: 15px;
+    gap: 0 15px;
     margin-bottom: 10px;
+
+    @include netbook {
+      justify-content: center;
+    }
 
     > button {
       @include button;
@@ -27,8 +48,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 40px;
-    height: 242px;
+    gap: 20px 40px;
+    min-height: 242px;
+
+    @include netbook {
+      flex-wrap: wrap;
+    }
 
     > .weather_item {
       @include bgWidget;
@@ -38,6 +63,10 @@
       align-items: center;
       background-color: #2e3035;
       box-shadow: 0px 3px 20px 0px #05050547;
+
+      @include netbook {
+        max-width: 200px;
+      }
 
       > p:first-child {
         font-size: 18px;

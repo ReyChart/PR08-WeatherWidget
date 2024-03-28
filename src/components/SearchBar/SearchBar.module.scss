@@ -46,7 +46,7 @@
     text-align: center;
     font-weight: 500;
     z-index: 1000;
-    background-color: $widget-bg;
+    background-color: $heading-color;
     padding: 20px;
     border-radius: 10px;
     box-shadow: $widget-shadow;
@@ -60,7 +60,7 @@
       width: 20px;
       height: 20px;
       z-index: -1;
-      background-color: $widget-bg;
+      background-color: $heading-color;
       transform: rotate(45deg);
       border-radius: 3px;
     }

@@ -5,13 +5,16 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 1000;
-  background-color: $widget-bg;
-  padding: 20px;
+  z-index: 1;
+  background-color: $heading-color;
+  padding: 40px;
   border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: $widget-shadow;
 }
 
 .content {
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 35px;
   text-align: center;
 }
