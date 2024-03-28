@@ -36,7 +36,9 @@ const WeatherFiveDay: FunctionComponent = () => {
       </div>
       <div className={style.item_wrapper}>
         {viewMode === '5days' && isLoadingFiveDay ? (
-          [...Array(5)].map((_, index) => <SkeletonLoader key={index} width={200} height={202} />)
+          [...Array(5)].map((_, index) => (
+            <SkeletonLoader key={index} className={style.weather_fiveday_skeleton} />
+          ))
         ) : viewMode === '5days' && weatherFiveDayData ? (
           weatherFiveDayData.list.map((item) => (
             <div key={item.dt} className={style.weather_item}>

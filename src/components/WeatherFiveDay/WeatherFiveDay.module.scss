@@ -55,6 +55,12 @@
       flex-wrap: wrap;
     }
 
+    & .weather_fiveday_skeleton {
+      @include skeleton;
+      width: 200px;
+      height: 202px;
+    }
+
     > .weather_item {
       @include bgWidget;
       display: flex;
@@ -89,5 +95,7 @@
 
   .item_text {
     font-size: 40px;
+    line-height: 42px;
+    text-align: center;
   }
 }

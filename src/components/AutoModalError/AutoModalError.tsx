@@ -6,7 +6,7 @@ interface AutoModalErrorProps {
   duration?: number;
 }
 
-const AutoModalError: FunctionComponent<AutoModalErrorProps> = ({ message, duration = 3000 }) => {
+const AutoModalError: FunctionComponent<AutoModalErrorProps> = ({ message, duration = 4000 }) => {
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {

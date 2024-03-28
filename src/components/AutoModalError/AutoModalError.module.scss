@@ -1,4 +1,5 @@
 @import '@/assets/styles/variables';
+@import '@/assets/styles/mixins';
 
 .modal {
   position: fixed;
@@ -10,11 +11,20 @@
   padding: 40px;
   border-radius: 10px;
   box-shadow: $widget-shadow;
+
+  @include mobileLarge {
+    padding: 20px;
+  }
 }
 
 .content {
-  font-size: 30px;
+  font-size: 20px;
   font-weight: 500;
-  line-height: 35px;
+  line-height: 25px;
   text-align: center;
+
+  @include mobileMedium {
+    font-size: 15px;
+    line-height: 18px;
+  }
 }

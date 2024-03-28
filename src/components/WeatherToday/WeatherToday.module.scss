@@ -15,6 +15,20 @@
     justify-content: center;
   }
 
+  & .weather_today_skeleton {
+    @include skeleton;
+    width: 400px;
+    height: 296px;
+
+    @include netbook {
+      width: 492px;
+    }
+
+    @include mobileSmall {
+      width: 400px;
+    }
+  }
+
   > .wrapper {
     @include bgWidget;
     max-width: 400px;

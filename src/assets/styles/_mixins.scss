@@ -55,3 +55,12 @@
   height: 25px;
   color: $heading-color;
 }
+
+@mixin skeleton {
+  background-color: $widget-bg;
+  border-radius: 20px;
+
+  &::after {
+    background-image: linear-gradient(90deg, $widget-bg, #5e5e5e, $widget-bg);
+  }
+}

@@ -17,7 +17,7 @@ const WeatherTodayInfo: FunctionComponent = () => {
     return (
       <div className={style.wrapper}>
         {[...Array(6)].map((_, index) => (
-          <SkeletonLoader key={index} width={226} height={138} />
+          <SkeletonLoader key={index} className={style.weather_info_skeleton} />
         ))}
       </div>
     );

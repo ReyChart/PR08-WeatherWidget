@@ -12,8 +12,8 @@ const WeatherToday: FunctionComponent = () => {
 
   if (!weatherData || isLoading) {
     return (
-      <section className={style.current_day}>
-        <SkeletonLoader width={400} height={296} />
+      <section className={style.weather_today}>
+        <SkeletonLoader className={style.weather_today_skeleton} />
         <WeatherTodayInfo />
       </section>
     );

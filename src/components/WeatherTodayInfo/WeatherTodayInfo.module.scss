@@ -19,6 +19,12 @@
     padding: 0;
   }
 
+  & .weather_info_skeleton {
+    @include skeleton;
+    width: 226px;
+    height: 138px;
+  }
+
   > .weather_item {
     @include bgWidget;
     display: flex;
