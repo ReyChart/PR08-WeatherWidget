@@ -13,10 +13,10 @@ const WeatherFiveDay: FunctionComponent = () => {
   const [viewMode, setViewMode] = useState<'today' | '5days'>('today');
 
   useEffect(() => {
-    if (viewMode === '5days' && weatherData) {
+    if (viewMode === '5days' && weatherData && !weatherFiveDayData) {
       fetchWeatherFiveDay(weatherData.name);
     }
-  }, [viewMode, weatherData, fetchWeatherFiveDay]);
+  }, [viewMode, weatherData, weatherFiveDayData, fetchWeatherFiveDay]);
 
   return (
     <section className={style.weather_fiveday}>

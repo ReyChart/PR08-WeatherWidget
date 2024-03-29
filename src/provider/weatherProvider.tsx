@@ -134,6 +134,8 @@ export const WeatherProvider: FunctionComponent<IWeatherProviderProps> = ({ chil
   );
 
   const searchCity = useCallback(async (city: string) => {
+    setWeatherData(null);
+    setWeatherFiveDayData(null);
     setGeoSearchActive(false);
     setIsLoadingFiveDay(true);
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=a09dde67358647287aa51f21c343ffac&lang=ru&units=metric`;
@@ -141,6 +143,8 @@ export const WeatherProvider: FunctionComponent<IWeatherProviderProps> = ({ chil
   }, []);
 
   const searchByGeo = useCallback(async (latitude: number, longitude: number) => {
+    setWeatherData(null);
+    setWeatherFiveDayData(null);
     setGeoSearchActive(true);
     setIsLoadingFiveDay(true);
     const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=a09dde67358647287aa51f21c343ffac&lang=ru&units=metric`;
