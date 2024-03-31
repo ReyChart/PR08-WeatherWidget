@@ -30,9 +30,7 @@ const WeatherToday: FunctionComponent = () => {
             </p>
             <p>{formatDateTimezone(weatherData.timezone, 'day')}</p>
           </div>
-          {/* <div className={style.icon}> */}
           <img src={`${urlIcon}${weatherData.weather[0].icon}@2x.png`} alt="Weather icon" />
-          {/* </div> */}
         </div>
         <div className={style.wrapper_bottom}>
           <p>

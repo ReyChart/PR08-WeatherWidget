@@ -1,1 +1,1 @@
-export const urlIcon = `http://openweathermap.org/img/wn/`;
+export const urlIcon = `https://openweathermap.org/img/wn/`;
