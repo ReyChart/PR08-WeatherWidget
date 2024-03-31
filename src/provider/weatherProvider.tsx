@@ -9,6 +9,8 @@ import {
   IWeatherFiveDayData,
 } from '../interfaces/weatherData.interfaces';
 
+const API_KEY = import.meta.env.VITE_API_KEY;
+
 interface IWeatherContextProps {
   weatherData: IWeatherData | null;
   isLoading: boolean;
@@ -76,9 +78,9 @@ export const WeatherProvider: FunctionComponent<IWeatherProviderProps> = ({ chil
       try {
         let url = '';
         if (city) {
-          url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=a09dde67358647287aa51f21c343ffac&lang=ru&units=metric`;
+          url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&lang=ru&units=metric`;
         } else if (latitude && longitude) {
-          url = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=a09dde67358647287aa51f21c343ffac&lang=ru&units=metric`;
+          url = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&lang=ru&units=metric`;
         }
 
         const response = await axios.get(url);
@@ -105,7 +107,7 @@ export const WeatherProvider: FunctionComponent<IWeatherProviderProps> = ({ chil
     setWeatherFiveDayData(null);
     setGeoSearchActive(false);
     setIsLoadingFiveDay(true);
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=a09dde67358647287aa51f21c343ffac&lang=ru&units=metric`;
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&lang=ru&units=metric`;
     await fetchWeather(url);
   }, []);
 
@@ -114,7 +116,7 @@ export const WeatherProvider: FunctionComponent<IWeatherProviderProps> = ({ chil
     setWeatherFiveDayData(null);
     setGeoSearchActive(true);
     setIsLoadingFiveDay(true);
-    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=a09dde67358647287aa51f21c343ffac&lang=ru&units=metric`;
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&lang=ru&units=metric`;
     await fetchWeather(url);
   }, []);
 
