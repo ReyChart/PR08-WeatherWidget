@@ -1,4 +1,4 @@
-import React, { useState, useEffect, FunctionComponent } from 'react';
+import React, { useEffect, useState, FunctionComponent } from 'react';
 import { useWeather } from '../../hooks/useWeather';
 import { MdMyLocation } from 'react-icons/md';
 import cn from 'classnames';
@@ -11,10 +11,10 @@ const SearchBar: FunctionComponent = () => {
   const {
     searchCity,
     searchByGeo,
-    setIsLoading,
     GeoSearchActive,
     error404,
     setError404,
+    setIsLoading,
     setIsLoadingFiveDay,
   } = useWeather();
 
@@ -72,7 +72,7 @@ const SearchBar: FunctionComponent = () => {
             setError404(null);
             handleInputChange(event);
           }}
-          onKeyPress={handleKeyPress}
+          onKeyDown={handleKeyPress}
           placeholder="Введите город"
         />
         {showError && error404 && <div className={style.error_message}>{error404}</div>}

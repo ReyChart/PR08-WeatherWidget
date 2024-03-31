@@ -1,5 +1,5 @@
-import { FunctionComponent, useContext } from 'react';
-import { WeatherContext } from '../../provider/weatherProvider';
+import { FunctionComponent } from 'react';
+import { useWeather } from '../../hooks/useWeather';
 import { formatDateUnix } from '../../utils/formatDate';
 import { convertKilometers } from '../../utils/convertKilometres';
 import { convertPressure } from '../../utils/convertPressure';
@@ -11,7 +11,7 @@ import SkeletonLoader from '../SkeletonLoader/SkeletonLoader';
 import style from './WeatherTodayInfo.module.scss';
 
 const WeatherTodayInfo: FunctionComponent = () => {
-  const { weatherData, isLoading } = useContext(WeatherContext);
+  const { weatherData, isLoading } = useWeather();
 
   if (!weatherData || isLoading) {
     return (

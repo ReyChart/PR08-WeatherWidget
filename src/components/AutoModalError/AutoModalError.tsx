@@ -1,12 +1,12 @@
 import { useEffect, useState, FunctionComponent } from 'react';
 import style from './AutoModalError.module.scss';
 
-interface AutoModalErrorProps {
+interface IAutoModalErrorProps {
   message: string;
   duration?: number;
 }
 
-const AutoModalError: FunctionComponent<AutoModalErrorProps> = ({ message, duration = 4000 }) => {
+const AutoModalError: FunctionComponent<IAutoModalErrorProps> = ({ message, duration = 4000 }) => {
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {

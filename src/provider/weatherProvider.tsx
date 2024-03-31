@@ -3,75 +3,42 @@ import AutoModalError from '../components/AutoModalError/AutoModalError';
 import { formatDateUnix } from '../utils/formatDate';
 import axios from 'axios';
 
-export interface IWeatherData {
-  main: {
-    temp: number;
-    humidity: number;
-    pressure: number;
-  };
-  name: string;
-  sys: {
-    country: string;
-    sunrise: number;
-    sunset: number;
-  };
-  timezone: number;
-  weather: [
-    {
-      description: string;
-      icon: string;
-    }
-  ];
-  wind: {
-    speed: number;
-  };
-  clouds: {
-    all: number;
-  };
-  visibility: number;
-}
-
-export interface IWeatherFiveDayItem {
-  dt_txt: string;
-  dt: number;
-  main: { temp: number };
-  weather: [{ icon: string }];
-}
-
-export interface IWeatherFiveDayData {
-  list: IWeatherFiveDayItem[];
-}
+import {
+  IWeatherData,
+  IWeatherFiveDayItem,
+  IWeatherFiveDayData,
+} from '../interfaces/weatherData.interfaces';
 
 interface IWeatherContextProps {
   weatherData: IWeatherData | null;
-  weatherFiveDayData: IWeatherFiveDayData | null;
   isLoading: boolean;
-  isLoadingFiveDay: boolean;
-  isGeoDenied: boolean;
   setIsLoading: (isLoading: boolean) => void;
+  weatherFiveDayData: IWeatherFiveDayData | null;
+  isLoadingFiveDay: boolean;
   setIsLoadingFiveDay: (isLoading: boolean) => void;
+  fetchWeatherFiveDay: (city: string | null, latitude?: number, longitude?: number) => void;
   searchCity: (city: string) => void;
   searchByGeo: (latitude: number, longitude: number) => void;
   GeoSearchActive: boolean;
   setGeoSearchActive: (GeoSearchActive: boolean) => void;
-  fetchWeatherFiveDay: (city: string | null, latitude?: number, longitude?: number) => void;
+  isGeoDenied: boolean;
   error404: string | null;
   setError404: (error: string | null) => void;
 }
 
 export const WeatherContext = createContext<IWeatherContextProps>({
   weatherData: null,
-  weatherFiveDayData: null,
   isLoading: false,
+  setIsLoading: () => {},
+  weatherFiveDayData: null,
   isLoadingFiveDay: false,
   setIsLoadingFiveDay: () => {},
-  isGeoDenied: false,
-  setIsLoading: () => {},
+  fetchWeatherFiveDay: async () => {},
   searchCity: () => {},
   searchByGeo: () => {},
   GeoSearchActive: false,
   setGeoSearchActive: () => {},
-  fetchWeatherFiveDay: async () => {},
+  isGeoDenied: false,
   error404: null,
   setError404: () => {},
 });
@@ -83,11 +50,11 @@ interface IWeatherProviderProps {
 export const WeatherProvider: FunctionComponent<IWeatherProviderProps> = ({ children }) => {
   const [weatherData, setWeatherData] = useState<IWeatherData | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [GeoSearchActive, setGeoSearchActive] = useState<boolean>(false);
   const [weatherFiveDayData, setWeatherFiveDayData] = useState<IWeatherFiveDayData | null>(null);
-  const [isGeoDenied, setIsGeoDenied] = useState<boolean>(false);
-  const [showModal, setShowModal] = useState(false);
   const [isLoadingFiveDay, setIsLoadingFiveDay] = useState<boolean>(false);
+  const [GeoSearchActive, setGeoSearchActive] = useState<boolean>(false);
+  const [isGeoDenied, setIsGeoDenied] = useState<boolean>(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
   const [error404, setError404] = useState<string | null>(null);
 
   const fetchWeather = async (url: string) => {
@@ -168,17 +135,17 @@ export const WeatherProvider: FunctionComponent<IWeatherProviderProps> = ({ chil
     <WeatherContext.Provider
       value={{
         weatherData,
-        weatherFiveDayData,
         isLoading,
-        isLoadingFiveDay,
-        isGeoDenied,
         setIsLoading,
+        weatherFiveDayData,
+        isLoadingFiveDay,
         setIsLoadingFiveDay,
+        fetchWeatherFiveDay,
         searchCity,
         searchByGeo,
         GeoSearchActive,
         setGeoSearchActive,
-        fetchWeatherFiveDay,
+        isGeoDenied,
         error404,
         setError404,
       }}

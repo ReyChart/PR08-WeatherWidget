@@ -1,5 +1,5 @@
-import { useContext, useState, FunctionComponent, useEffect } from 'react';
-import { WeatherContext } from '../../provider/weatherProvider';
+import { useEffect, useState, FunctionComponent } from 'react';
+import { useWeather } from '../../hooks/useWeather';
 import { formatDate } from '../../utils/formatDate';
 import SkeletonLoader from '../SkeletonLoader/SkeletonLoader';
 import { urlIcon } from '../../constants/urlIcon';
@@ -8,8 +8,7 @@ import cn from 'classnames';
 import style from './WeatherFiveDay.module.scss';
 
 const WeatherFiveDay: FunctionComponent = () => {
-  const { weatherData, weatherFiveDayData, fetchWeatherFiveDay, isLoadingFiveDay } =
-    useContext(WeatherContext);
+  const { weatherData, weatherFiveDayData, fetchWeatherFiveDay, isLoadingFiveDay } = useWeather();
   const [viewMode, setViewMode] = useState<'today' | '5days'>('today');
 
   useEffect(() => {
