@@ -57,10 +57,20 @@
 }
 
 @mixin skeleton {
+  width: 100%;
   background-color: $widget-bg;
   border-radius: 20px;
 
   &::after {
+    background-image: -webkit-gradient(
+      linear,
+      left top,
+      right top,
+      from($widget-bg),
+      color-stop(#5e5e5e),
+      to($widget-bg)
+    );
+    background-image: -o-linear-gradient(left, $widget-bg, #5e5e5e, $widget-bg);
     background-image: linear-gradient(90deg, $widget-bg, #5e5e5e, $widget-bg);
   }
 }
