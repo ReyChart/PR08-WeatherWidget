@@ -11,7 +11,7 @@
 - Различные библиотеки _(ознакомиться можно в package.json)_
 
 ### Как запустить проект
-- Клонируем репозиторий на локальный ПК (```git clone https://github.com/ReyChart/PR07-BookShop.git```)
+- Клонируем репозиторий на локальный ПК (```git clone https://github.com/ReyChart/PR08-WeatherWidget.git```)
 - Устанавливаем пакеты с помощью **yarn**
 - Запускаем проект с помощью **yarn dev** (автоматически открывается http://localhost:3000/PR08-WeatherWidget)
 
